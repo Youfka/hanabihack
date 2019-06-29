@@ -19,6 +19,6 @@ deploy_app:
     - echo "====== Sync local and remote directory ======"
     # Ending "/" in string "./dist/" is important!
     - pwd
-    - rsync -azPq -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --delete . "$TARGET_SERVER_USER_HOST:$TARGET_SERVER_PATH"
+    - rsync -azPq -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --delete ./ "$TARGET_SERVER_USER_HOST:$TARGET_SERVER_PATH"
   only:
   - master
