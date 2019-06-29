@@ -5,7 +5,7 @@ deploy_app:
   image: alpine
   stage: deploy
   script:
-    - echo "====== Deploy to production server ======"
+    - echo "====== Deploy to server ======"
     - apk update && apk upgrade
     - apk add openssh bash rsync
     - echo "====== Add target servers secret key ======"
@@ -16,8 +16,9 @@ deploy_app:
     - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -T "$TARGET_SERVER_USER_HOST"
     - echo "====== Install rsync on remote server ======"
     - ssh -T -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$TARGET_SERVER_USER_HOST" 'sudo apt-get install rsync -y'
+    - echo "====== Install requirements ======"
+    - ssh -T -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$TARGET_SERVER_USER_HOST" '/home/ns8/hanabi/venv/bin/pip install -r requirements'
     - echo "====== Sync local and remote directory ======"
-    # Ending "/" in string "./dist/" is important!
     - rsync -azPq -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --delete ./ "$TARGET_SERVER_USER_HOST:$TARGET_SERVER_PATH"
     - ssh -T -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$TARGET_SERVER_USER_HOST" 'sudo service hanabi restart'
   only:
