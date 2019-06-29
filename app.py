@@ -1,3 +1,4 @@
+import random
 from flask import Flask, jsonify
 from flask_cors import CORS
 from sqlalchemy import create_engine
@@ -21,6 +22,7 @@ def index():
 
 @app.route('/api/userToProf')
 def profile():
+    random_user = []
     labels = []
 
     sql_developer = []
@@ -35,6 +37,7 @@ def profile():
     javascript_developer = []
 
     for i in session.query(Prof).all():
+        random_user.append(round(random.random(), 3))
         labels.append(i.language)
         sql_developer.append(i.sql_developer)
         java_developer.append(i.java_developer)
@@ -65,9 +68,9 @@ def profile():
         'datasets': [
             {
                 'label': 'Your skills',
-                'data': [40, 39, 10, 40, 39, 80]
+                'data': random_user,
             },
-            *datasets
+            *datasets,
         ]
     })
 
