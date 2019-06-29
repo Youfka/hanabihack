@@ -19,6 +19,6 @@ deploy_app:
     - echo "====== Sync local and remote directory ======"
     # Ending "/" in string "./dist/" is important!
     - rsync -azPq -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --delete ./ "$TARGET_SERVER_USER_HOST:$TARGET_SERVER_PATH"
-    - /bin/bash sudo service hanabi restart
+    - ssh -T -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$TARGET_SERVER_USER_HOST" 'sudo service hanabi restart'
   only:
   - master
