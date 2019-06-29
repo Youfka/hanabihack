@@ -8,5 +8,5 @@ CORS(app)
 @app.route('/')
 def index():
     return jsonify({
-        'status': 'ok'
+        'status': 'ok...'
     })
