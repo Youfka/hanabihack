@@ -14,13 +14,6 @@ engine = create_engine('sqlite:///data.db')
 session = Session(bind=engine)
 
 
-@app.route('/')
-def index():
-    return jsonify({
-        'status': 'ok...'
-    })
-
-
 @app.route('/api/userToProf')
 def profile():
     random_user = []
