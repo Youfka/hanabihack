@@ -7483,9 +7483,11 @@ body.skin-3 {
 
 .graph-medium {
   max-width: 400px;
+  margin: 0 auto;
 }
 .graph-small {
   max-width: 300px;
+  margin: 0 auto;
 }
 .vertical-align {
   display: flex;

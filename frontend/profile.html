@@ -59,7 +59,7 @@
           <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Career</span> <span
             class="fa arrow"></span></a>
           <ul class="nav nav-second-level collapse">
-            <li><a href="#">vacancy</a></li>
+            <li><a href="./vacancy.html">vacancy</a></li>
             <li><a href="#">Jobs offer
               <span
                 class="label label-danger pull-right">3</span>
@@ -232,27 +232,30 @@
             </div>
           </div>
         </div>
-
-        <div class="col-md-6">
-          <div class="ibox float-e-margins">
-            <div class="ibox-title">
-              Matching user to popular skills
-            </div>
-            <div class="ibox-content">
-                <canvas id="userToSkills" width="300" height="300" class="graph-small"></canvas>
-            </div>
-          </div>
+        
+        <div style="">
+            <div class="col-md-6">
+                <div class="ibox float-e-margins">
+                  <div class="ibox-title">
+                    Matching user to popular skills
+                  </div>
+                  <div class="ibox-content">
+                      <canvas id="userToSkills" width="300" height="300" class="graph-small"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="ibox float-e-margins">
+                  <div class="ibox-title">
+                    Code changes per hour
+                  </div>
+                  <div class="ibox-content">
+                    <img style="height: 300px; margin: 0 auto; display: block;" src="img/gr/_gr2.jpeg" alt="">
+                  </div>
+                </div>
+              </div>
         </div>
-        <div class="col-md-6">
-          <div class="ibox float-e-margins">
-            <div class="ibox-title">
-              Code changes per hour
-            </div>
-            <div class="ibox-content">
-              <img style="width: 100%;" src="img/gr/_gr2.jpeg" alt="">
-            </div>
-          </div>
-        </div>
+       
 
         <div class="col-md-12">
             <div class="ibox float-e-margins">
@@ -310,6 +313,7 @@
 <script>
 var radarEl = document.getElementById('userToProf');
 var userToProf = document.getElementById('userToProf').getContext('2d');
+var userToSkills = document.getElementById('userToSkills').getContext('2d');
 
 function addData(chart, label, data) {
     chart.data.labels.push(label);
@@ -327,6 +331,7 @@ function removeData(chart) {
 }
 
 function getNormalyData(data, number){
+
   var set1 = data.datasets[0];
   var set2 = data.datasets[number];
 
@@ -362,8 +367,7 @@ $.ajax({
   data1 = data;
   let newData = getNormalyData(data1, 1);
 
-  // newData.datasets[1].data = newData.datasets[1].data.sort((a,b) => {return a - b;});
-  
+  // newData.datasets[1].data = newData.datasets[1].data.sort((a,b) => {return a - b;}); 
   chartUserToProof = new Chart(userToProf, {
     type: 'radar',
     data: newData,
@@ -371,27 +375,39 @@ $.ajax({
   });
 
   $('.u-list').each(function(index) {
-  $('.u-list__text', $(this)).text(data1.datasets[index + 1].label)
-});
-  
-
-});
-
-$.ajax({
-  url: "http://207.154.199.253/api/userToProf",
-}).done(function(data) {
-  new Chart(userToSkills, {
-    type: 'radar',
-    data: data,
-    options: {}
+    $('.u-list__text', $(this)).text(data1.datasets[index + 1].label)
   });
+  
 });
-let data2={
-  labels: ['Running', 'Swimming', 'Eating', 'Cycling'],
+
+
+let userToSkillsData = {
+  labels: ['JavaScript', 'Python', 'C#', 'PHP', 'C++', 'Java', 'SQL', 'Kotlin', 'React.js', 'Ruby'],
   datasets: [{
-      data: [20, 10, 4, 2]
-  }]
+        data: [0.7, 0.1, 0, 0.3, 0, 0, 0.1, 0.3, 0.6, 0],
+        label: 'User skills',
+        backgroundColor: 'rgba(13, 85, 255, 0.5)'
+      },
+      {
+        data: [0.8, 0.7, 0.7, 0.8, 0.6, 0.5, 0.5, 0.4, 0.6, 0.7],
+        label: 'Required skilld',
+        backgroundColor: 'rgba(255, 0, 0, 0.5)'
+      }]
 };
+
+bubbleSort(userToSkillsData.datasets[0].data, userToSkillsData.datasets[1].data, userToSkillsData.labels);
+
+// $.ajax({
+//   url: "http://207.154.199.253/api/userToProf",
+// }).done(function(data) {
+let chartUserToSkills = new Chart(userToSkills, {
+    type: 'radar',
+    data: userToSkillsData,
+    options: {}
+});
+//   });
+// });
+
 
 $('.u-list').on('click', function() {
   $('.u-list').removeClass('u-list--active')
@@ -406,10 +422,10 @@ $('.u-list').on('click', function() {
   return false;
 });
 
-var swap = function(arr, j) {
+function swap(arr, j) {
   [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
 }
-var bubbleSort = (arr, arr2, arr3) => {
+function bubbleSort(arr, arr2, arr3) {
     for (let i = 0, endI = arr.length - 1; i < endI; i++) {
         let wasSwap = false;
         for (let j = 0, endJ = endI - i; j < endJ; j++) {

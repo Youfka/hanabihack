@@ -19,16 +19,3 @@ class Prof(Base):
     databases_administrator = Column(Float)
     devops = Column(Float)
     javascript_developer = Column(Float)
-
-
-
-Base.metadata.create_all(engine)
-
-###
-# from sqlalchemy.orm import Session
-#
-# session = Session(bind=engine)
-#
-# print(
-#     session.query(Prof).first()
-# )
