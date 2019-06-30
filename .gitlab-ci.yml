@@ -23,4 +23,4 @@ deploy_app:
     - rsync -azPq -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --delete ./frontend/ "$TARGET_SERVER_USER_HOST:$TARGET_FRONTEND_PATH"
     - ssh -T -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$TARGET_SERVER_USER_HOST" 'sudo service hanabi restart'
   only:
-  - master
+    - master
