@@ -13,7 +13,7 @@ deploy_app:
     - echo $TARGET_SERVER_SECRET_KEY_BASE64 | base64 -d > ~/.ssh/id_rsa
     - chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
     - echo "====== Test ssh connection ======"
-    - ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -T "$TARGET_SERVER_USER_HOST"
+    - ssh -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/dev/null -T "$TARGET_SERVER_USER_HOST"
     - echo "====== Install rsync on remote server ======"
     - ssh -T -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$TARGET_SERVER_USER_HOST" 'sudo apt-get install rsync -y'
     - echo "====== Install requirements ======"
