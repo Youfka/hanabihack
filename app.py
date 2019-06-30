@@ -1,4 +1,5 @@
 import random
+
 from flask import Flask, jsonify
 from flask_cors import CORS
 from sqlalchemy import create_engine
@@ -37,7 +38,11 @@ def profile():
     javascript_developer = []
 
     for i in session.query(Prof).all():
-        random_user.append(round(random.random(), 3))
+        if i.language in ['R', 'F#', 'Other(s):', 'Erlang', 'nan', 'Dart', 'Rust', 'Objective-C', 'VBA', 'Clojure',
+                          "Bash/Shell/PowerShell", "WebAssembly", "Assembly", "Elixir"
+                          ]:
+            continue
+        random_user.append(round(random.random() / 10, 3))
         labels.append(i.language)
         sql_developer.append(i.sql_developer)
         java_developer.append(i.java_developer)
