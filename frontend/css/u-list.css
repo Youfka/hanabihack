@@ -1,0 +1,32 @@
+.u-list {
+  display:         flex;
+  justify-content: space-between;
+  align-items:     center;
+  padding: 5px 0;
+  cursor: pointer;
+  border-bottom: 1px solid #e7eaec;
+}
+
+.u-list:last-child {
+  border-bottom: none;
+}
+
+.u-list--active {
+  color: #0d55ff;
+}
+
+.u-list__left {
+  display: flex;
+  align-items: center;
+}
+
+.u-list img {
+  float:          left;
+  width:          25px;
+  border-radius:  50%;
+  margin: 0;
+}
+
+.u-list__text {
+  margin-left:    10px;
+}
