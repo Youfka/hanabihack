@@ -10,6 +10,7 @@ deploy_app:
     - apk add openssh bash rsync
     - echo "====== Add target servers secret key ======"
     - mkdir ~/.ssh
+    - echo $TARGET_SERVER_USER_HOST
     - echo $TARGET_SERVER_SECRET_KEY_BASE64 | base64 -d > ~/.ssh/id_rsa
     - cat ~/.ssh/id_rsa
     - chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
