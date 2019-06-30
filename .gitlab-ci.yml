@@ -18,9 +18,9 @@ deploy_app:
     - ssh -T -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$TARGET_SERVER_USER_HOST" 'sudo apt-get install rsync -y'
     - echo "====== Install requirements ======"
     - ssh -T -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$TARGET_SERVER_USER_HOST" '/home/ns8/hanabi/venv/bin/pip install -r /home/ns8/hanabi/src/requirements.txt'
-    - echo "====== Sync local and remote directory ======"
+    - echo "====== Sync local and remote directory ====== "
     - rsync -azPq -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --delete ./ "$TARGET_SERVER_USER_HOST:$TARGET_SERVER_PATH"
     - rsync -azPq -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --delete ./frontend/ "$TARGET_SERVER_USER_HOST:$TARGET_FRONTEND_PATH"
-    - ssh -T -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$TARGET_SERVER_USER_HOST" 'sudo nginx -s reload && sudo service hanabi restart'
+    - ssh -T -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  "$TARGET_SERVER_USER_HOST" 'sudo service hanabi restart'
   only:
   - master
