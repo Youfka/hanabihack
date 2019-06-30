@@ -42,7 +42,7 @@ def profile():
                           "Bash/Shell/PowerShell", "WebAssembly", "Assembly", "Elixir"
                           ]:
             continue
-        random_user.append(round(random.random() / 10, 3))
+        random_user.append(round(random.random() / 5, 3))
         labels.append(i.language)
         sql_developer.append(i.sql_developer)
         java_developer.append(i.java_developer)
